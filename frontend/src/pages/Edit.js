@@ -39,6 +39,8 @@ const Edit = () => {
     editData['type'] = type;
     editData['mobile'] = data.Mobile || '';
     editData['amt'] = data.Amount || '';
+    editData['pendingAmt'] = data.PendingAmount || '';
+    editData['assuredAmt'] = data.AssuredAmount || '';
     editData['collection_point'] = collection_point;
     editData['remarks'] = data.Remarks || '';
     return editData;

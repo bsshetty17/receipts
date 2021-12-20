@@ -13,6 +13,8 @@ const Add = () => {
     mobile: '',
     amt: '',
     remarks: '',
+    pendingAmt: '',
+    assuredAmt: '',
     collection_point: {
       value: 'Counter',
       label: 'Counter',
