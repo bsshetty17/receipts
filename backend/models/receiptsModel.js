@@ -28,6 +28,15 @@ const receiptsSchema = mongoose.Schema(
     },
     Amount: {
       type: Number,
+      required: true,
+      trim: true,
+    },
+    AssuredAmount: {
+      type: Number,
+      trim: true,
+    },
+    PendingAmount: {
+      type: Number,
       trim: true,
     },
     Remarks: {
