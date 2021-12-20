@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { ReceiptTypes, CollectionPoints } from '../constants/AppConstants';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import cloneDeep from 'lodash/cloneDeep';
 
 const AddEditForm = (props) => {
   const { submit, data, navigate, formType, error, setError } = props;
@@ -23,7 +24,12 @@ const AddEditForm = (props) => {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const tempData = cloneDeep(formData);
+    tempData[e.target.name] = e.target.value;
+    if (tempData['assuredAmt']) {
+      tempData['pendingAmt'] = tempData['assuredAmt'] - tempData['amt'];
+    }
+    setFormData(tempData);
     setState();
   };
 
@@ -39,6 +45,8 @@ const AddEditForm = (props) => {
     newData['receiptType'] = formData.type.value || '';
     newData['Mobile'] = formData.mobile || '';
     newData['Amount'] = formData.amt || '';
+    newData['AssuredAmount'] = formData.assuredAmt || '';
+    newData['PendingAmount'] = formData.pendingAmt || '';
     newData['collectionPoint'] = formData.collection_point.value || '';
     newData['Remarks'] = formData.remarks || '';
 
@@ -71,6 +79,9 @@ const AddEditForm = (props) => {
   };
 
   useEffect(() => {
+    if (data['assuredAmt'] && !data['pendingAmt']) {
+      data['pendingAmt'] = data['assuredAmt'] - data['amt'];
+    }
     setFormData(data);
     setState();
     setOptions({
@@ -81,6 +92,9 @@ const AddEditForm = (props) => {
   }, []);
 
   useEffect(() => {
+    if (data['assuredAmt'] && !data['pendingAmt']) {
+      data['pendingAmt'] = data['assuredAmt'] - data['amt'];
+    }
     setFormData(data);
     setState();
   }, [data]);
@@ -178,6 +192,18 @@ const AddEditForm = (props) => {
           />
         </div>
         <div className='mb-3'>
+          <label htmlFor='assuredAmt' className='form-label'>
+            Assured Amt<small>(leave blank for counter receipts)</small>
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            name='assuredAmt'
+            value={formData.assuredAmt}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='mb-3'>
           <label htmlFor='amt' className='form-label'>
             Amt
           </label>
@@ -187,6 +213,18 @@ const AddEditForm = (props) => {
             name='amt'
             value={formData.amt}
             readOnly={formState.readOnlyAmt}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='mb-3'>
+          <label htmlFor='pendingAmt' className='form-label'>
+            Pending Amt<small>(leave blank for counter receipts)</small>
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            name='pendingAmt'
+            value={formData.pendingAmt}
             onChange={handleChange}
           />
         </div>
