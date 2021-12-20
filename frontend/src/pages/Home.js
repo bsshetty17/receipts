@@ -230,8 +230,18 @@ const Home = () => {
         accessor: 'Mobile',
       },
       {
+        Header: 'Assured Amt',
+        accessor: 'AssuredAmount',
+        sortType: 'basic',
+      },
+      {
         Header: 'Amt',
         accessor: 'Amount',
+        sortType: 'basic',
+      },
+      {
+        Header: 'Pending Amt',
+        accessor: 'PendingAmount',
         sortType: 'basic',
       },
       {
