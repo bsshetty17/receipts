@@ -3,6 +3,7 @@ import receiptRoutes from './backend/routes/receiptRoutes.js';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path';
 // const path = require('path');
 
 //connect database
@@ -14,6 +15,8 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 // app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 //Creating API for user
