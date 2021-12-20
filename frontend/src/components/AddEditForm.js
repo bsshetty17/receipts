@@ -26,9 +26,9 @@ const AddEditForm = (props) => {
   const handleChange = (e) => {
     const tempData = cloneDeep(formData);
     tempData[e.target.name] = e.target.value;
-    if (tempData['assuredAmt']) {
-      tempData['pendingAmt'] = tempData['assuredAmt'] - tempData['amt'];
-    }
+    // if (tempData['assuredAmt']) {
+    //   tempData['pendingAmt'] = tempData['assuredAmt'] - tempData['amt'];
+    // }
     setFormData(tempData);
     setState();
   };
@@ -79,9 +79,9 @@ const AddEditForm = (props) => {
   };
 
   useEffect(() => {
-    if (data['assuredAmt'] && !data['pendingAmt']) {
-      data['pendingAmt'] = data['assuredAmt'] - data['amt'];
-    }
+    // if (data['assuredAmt'] && !data['pendingAmt']) {
+    //   data['pendingAmt'] = data['assuredAmt'] - data['amt'];
+    // }
     setFormData(data);
     setState();
     setOptions({
@@ -92,9 +92,9 @@ const AddEditForm = (props) => {
   }, []);
 
   useEffect(() => {
-    if (data['assuredAmt'] && !data['pendingAmt']) {
-      data['pendingAmt'] = data['assuredAmt'] - data['amt'];
-    }
+    // if (data['assuredAmt'] && !data['pendingAmt']) {
+    //   data['pendingAmt'] = data['assuredAmt'] - data['amt'];
+    // }
     setFormData(data);
     setState();
   }, [data]);
@@ -239,6 +239,7 @@ const AddEditForm = (props) => {
             onChange={handleChange}
           />
         </div>
+        
         <div className='text-center'>
           <button className='btn btn-primary m-1 pb-1'>Save</button>
 
